@@ -1,6 +1,7 @@
 import random
 from faker import Faker
 import json
+import os
 
 
 def model_():
@@ -87,11 +88,17 @@ def func_():
             'author': next(authors_())
         }
     }
-    print(a)
+
+    filename = 'exam.txt'
+    if os.path.exists('exam.txt'):
+        with open(filename, "a", encoding='utf8') as f:
+            json.dump(a, f, ensure_ascii=False, separators=(', ', ': '), indent=4)
+    else:
+        with open(filename, "x", encoding='utf8') as f:
+            json.dump(a, f, ensure_ascii=False, separators=(', ', ': '), indent=4)
 
 
 def main():
-    # f = open('exam.txt', 'wt', encoding='utf8')
     counter_ = 1
     while counter_ <= 100:
         func_()
